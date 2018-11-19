@@ -22,7 +22,13 @@ It was built with a docker maven:3-jdk-8, then by cloning this repo,
 
 ## Install into existing presto install:
 
-Copy /presto-with-jtdssqlserver/presto-jtdssqlserver/target/presto-jtdssqlserver-*-SNAPSHOT/* into /opt/presto/plugin/jtdssqlserver on your presto install
+Copy 
+
+            /presto-with-jtdssqlserver/presto-jtdssqlserver/target/presto-jtdssqlserver-*-SNAPSHOT/* 
+
+into 
+
+            /opt/presto/plugin/jtdssqlserver on your presto install
 
 ## Connection Configuration
 
