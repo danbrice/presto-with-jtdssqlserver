@@ -28,7 +28,9 @@ Copy
 
 into 
 
-            /opt/presto/plugin/jtdssqlserver on your presto install
+            /opt/presto/plugin/jtdssqlserver
+            
+on your presto install
 
 ## Connection Configuration
 
