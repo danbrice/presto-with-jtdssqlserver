@@ -1,3 +1,43 @@
+# Presto with jtds driver for use with MS SQL Server
+
+This code includes jtdssqlserver connector plugin which uses the [jtds driver](http://jtds.sourceforge.net/) to connect to MS SQL Server and which supports some types of connections with SQL Server that the standard microsoft jdbc driver does not (e.g. domain logins).
+
+Source was simply created by copying presto-sqlserver to presto-jtdssqlserver, using the jtds driver instead, and renaming most things to JtdsSqlServer, updating it's pom.xml and changing the root pom.xml to include useSystemClassLoader=false for surefire.
+
+
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+                <useSystemClassLoader>false</useSystemClassLoader>
+            </configuration>
+
+## Build:
+
+It was built with a docker maven:3-jdk-8, then by cloning this repo, 
+
+apt-get update && apt-get install -y git nano
+git clone https://github.com/danbrice/presto-with-jtdssqlserver
+cd presto-jtdssqlserver
+mvn install
+
+## Install:
+
+Then copy /presto/presto-jtdssqlserver/target/presto-jtdssqlserver-0.214-SNAPSHOT/* into /opt/presto/plugin/jtdssqlserver on your presto install
+
+## Connection Configuration
+
+Create new properties file inside etc/catalog dir, named mycatalog
+
+    connector.name=jtdssqlserver
+    connection-url=jdbc:jtds:sqlserver://ip:port;databaseName=MYDBNAME;domain=MYDOMAIN;useNTLMv2=true;
+    connection-user=myusername
+    connection-password=mypassword
+
+## Test
+
+    presto --server localhost:8080 --catalog mycatalog
+    presto> show schemas from jira;
+
 # Presto [![Build Status](https://travis-ci.org/prestodb/presto.svg?branch=master)](https://travis-ci.org/prestodb/presto)
 
 Presto is a distributed SQL query engine for big data.
