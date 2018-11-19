@@ -11,22 +11,22 @@ Source was simply created by copying presto-sqlserver to presto-jtdssqlserver, u
                 <useSystemClassLoader>false</useSystemClassLoader>
             </configuration>
 
-## Build:
+## Build just this module:
 
 It was built with a docker maven:3-jdk-8, then by cloning this repo, 
 
-apt-get update && apt-get install -y git nano
-git clone https://github.com/danbrice/presto-with-jtdssqlserver
-cd presto-jtdssqlserver
-mvn install
+            apt-get update && apt-get install -y git nano && \
+            git clone https://github.com/danbrice/presto-with-jtdssqlserver && \
+            cd presto-with-jtdssqlserver/presto-jtdssqlserver && \
+            mvn install
 
-## Install:
+## Install into existing presto install:
 
-Then copy /presto/presto-jtdssqlserver/target/presto-jtdssqlserver-0.214-SNAPSHOT/* into /opt/presto/plugin/jtdssqlserver on your presto install
+Copy /presto/presto-jtdssqlserver/target/presto-jtdssqlserver-0.214-SNAPSHOT/* into /opt/presto/plugin/jtdssqlserver on your presto install
 
 ## Connection Configuration
 
-Create new properties file inside etc/catalog dir, named mycatalog
+Create new properties file inside etc/catalog dir, named mycatalog.properties
 
     connector.name=jtdssqlserver
     connection-url=jdbc:jtds:sqlserver://ip:port;databaseName=MYDBNAME;domain=MYDOMAIN;useNTLMv2=true;
@@ -36,7 +36,9 @@ Create new properties file inside etc/catalog dir, named mycatalog
 ## Test
 
     presto --server localhost:8080 --catalog mycatalog
-    presto> show schemas from jira;
+    presto> show schemas from mycatalog;
+    
+# Standard instructions:
 
 # Presto [![Build Status](https://travis-ci.org/prestodb/presto.svg?branch=master)](https://travis-ci.org/prestodb/presto)
 
