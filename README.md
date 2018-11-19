@@ -24,7 +24,7 @@ It was built with a docker maven:3-jdk-8, then by cloning this repo,
 
 Copy 
 
-            /presto-with-jtdssqlserver/presto-jtdssqlserver/target/presto-jtdssqlserver-*-SNAPSHOT/* 
+            presto-with-jtdssqlserver/presto-jtdssqlserver/target/presto-jtdssqlserver-*-SNAPSHOT/* 
 
 into 
 
